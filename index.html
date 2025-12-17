@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NCSS AIMS 2.0 Journey Mapper</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              ncss: {
+                red: '#E31837',
+                purple: '#5D2A78',
+                teal: '#0097A7',
+                warmGray: '#F5F5F4',
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      /* Custom scrollbar for better UI in complex panels */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+      }
+
+      /* Print Styles for PDF Export */
+      @media print {
+        @page { 
+          margin: 0.25cm; 
+          size: landscape; 
+        }
+        
+        /* Instead of hiding html/body which can be aggressive, hide all direct children of body */
+        body > * {
+          visibility: hidden;
+        }
+
+        /* Reset Root Elements */
+        html, body {
+          background: white;
+          width: 100%;
+          height: auto !important;
+          min-height: 100%;
+          overflow: visible !important;
+          margin: 0;
+          padding: 0;
+        }
+
+        /* Make printable area visible and positioned at top-left */
+        /* Note: We target the specific class but ensure it overrides the 'body > *' hiding */
+        .printable-area {
+          visibility: visible !important;
+          display: block !important;
+          position: absolute !important;
+          top: 0 !important;
+          left: 0 !important;
+          width: 100% !important;
+          height: auto !important;
+          margin: 0 !important;
+          padding: 0 !important;
+          background: white !important;
+          z-index: 99999 !important;
+          
+          /* Force styles for wide maps */
+          min-width: 1024px !important;
+          /* Scale down to fit landscape A4 - adjust as needed */
+          zoom: 0.6; 
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
+        }
+
+        /* Ensure children of printable area are visible */
+        .printable-area * {
+          visibility: visible !important;
+        }
+
+        /* Hide elements explicitly marked as no-print */
+        .no-print {
+          display: none !important;
+        }
+
+        /* Override specific Tailwind overflow/height constraints */
+        .printable-area .overflow-hidden,
+        .printable-area .overflow-x-auto,
+        .printable-area .overflow-y-auto {
+          overflow: visible !important;
+          height: auto !important;
+        }
+        
+        /* Fix shadows and borders for print */
+        .printable-area .shadow-sm,
+        .printable-area .shadow-md {
+          box-shadow: none !important;
+          border: 1px solid #ddd !important;
+        }
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.31.0",
+    "react/": "https://aistudiocdn.com/react@^19.2.1/",
+    "react": "https://aistudiocdn.com/react@^19.2.1"
+  }
+}
+</script>
+</head>
+  <body class="bg-gray-50 text-slate-800 antialiased overflow-hidden h-screen w-screen">
+    <div id="root"></div>
+  </body>
+</html>

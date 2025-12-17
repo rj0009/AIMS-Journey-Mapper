@@ -1,0 +1,7 @@
+{
+  "name": "NCSS AIMS 2.0 Journey Mapper",
+  "description": "A real-time customer journey mapping tool for social service agencies using Gemini 2.0 Flash for transcription, analysis, and visual generation.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
