@@ -3,7 +3,7 @@ import { JourneyMapData, TranscriptItem, JourneyStage } from "../types";
 
 // Note: In a real deployment, keys should be proxied or handled securely.
 // Using process.env.API_KEY as per instructions.
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEYY });
 
 // Define types locally inferred from the SDK instance since they are not exported directly
 type LiveSession = Awaited<ReturnType<typeof ai.live.connect>>;
